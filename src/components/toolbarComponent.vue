@@ -27,7 +27,7 @@
           to="#"
           class="d-flex align-center text-decoration-none mr-2"
         >
-          <img src="/images/v-logo-small.png" alt="" height="48" class="mr-1" />
+          <nuxt-img src="/favicon.ico" alt="" height="48" class="mr-1" />
           <span class="font-weight-black text-uppercase">
             Family Carousel
           </span>
@@ -68,26 +68,26 @@ export default {
     return {
       drawer: null,
       menu: [
-        {
-          title: "Solutions",
-          link: "#solutions",
-          isAuthed: false,
-        },
-        {
-          title: "Pricing",
-          link: "#pricing",
-          isAuthed: false,
-        },
-        {
-          title: "Docs",
-          link: "#docs",
-          isAuthed: false,
-        },
-        {
-          title: "More",
-          link: "#more",
-          isAuthed: false,
-        },
+        // {
+        //   title: "Solutions",
+        //   link: "#solutions",
+        //   isAuthed: false,
+        // },
+        // {
+        //   title: "Pricing",
+        //   link: "#pricing",
+        //   isAuthed: false,
+        // },
+        // {
+        //   title: "Docs",
+        //   link: "#docs",
+        //   isAuthed: false,
+        // },
+        // {
+        //   title: "More",
+        //   link: "#more",
+        //   isAuthed: false,
+        // },
       ],
     };
   },
