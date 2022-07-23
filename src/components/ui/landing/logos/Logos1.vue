@@ -1,0 +1,51 @@
+<template>
+  <v-sheet class="d-flex flex-column">
+    <svg class="logos-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1442 163">
+      <path d="m-3.90909,6l48.30303,16c48.30303,16 144.90908,48 241.51514,48c96.60606,0 193.21211,-32 289.81817,-32c96.60606,0 193.21211,32 289.81817,53.3c96.60606,21.7 193.21211,31.7 289.81817,16c96.60606,-16.3 193.21211,-58.3 241.51514,-80l48.30303,-21.3l0,160l-48.30303,0c-48.30303,0 -144.90908,0 -241.51514,0c-96.60606,0 -193.21211,0 -289.81817,0c-96.60606,0 -193.21211,0 -289.81817,0c-96.60606,0 -193.21211,0 -289.81817,0c-96.60606,0 -193.21211,0 -241.51514,0l-48.30303,0l0,-160z"/>
+    </svg>
+
+    <v-sheet color="surface">
+      <v-container>
+        <div class="text-center">
+          <a
+            v-for="(logo, index) in logos"
+            :key="index"
+            :href="logo.link"
+          >
+            <img :src="logo.image" />
+          </a>
+        </div>
+      </v-container>
+    </v-sheet>
+  </v-sheet>
+</template>
+
+<script>
+export default {
+  props: {
+    logos: {
+      type: Array,
+      default: () => []
+    }
+  }
+}
+</script>
+
+<style scoped>
+.logos-bg {
+  fill: var(--v-surface-base);
+}
+
+img {
+  filter: grayscale(100%) brightness(2);
+  width: 180px;
+}
+
+.theme--dark img {
+  filter: grayscale(100%) invert(1);
+}
+
+img:hover {
+  filter: none;
+}
+</style>

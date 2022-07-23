@@ -1,0 +1,23 @@
+<template>
+  <v-sheet dark>
+    <div class="d-flex flex-column flex-md-row">
+      <div class="w-full w-md-half d-flex align-center">
+        <div class="pa-6 pa-md-12">
+          <div class="text-uppercase font-weight-bold body-2 primary--text mb-2">Work with us</div>
+          <h2 class="text-h3 text-lg-h2">Get your startup ready for business</h2>
+          <div class="text-h6 text-lg-h5 mt-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus impedit error labore doloremque fugit! Dolor fugit molestiae vero quos quisquam nobis, eos debitis magni omnis ea incidunt amet voluptate dignissimos!</div>
+          <div class="mt-7">
+            <v-btn large outlined tile>Get in touch</v-btn>
+          </div>
+        </div>
+      </div>
+      <div class="w-full w-md-half">
+        <v-img
+          src="/images/features/11.jpg"
+          height="100%"
+          alt=""
+        ></v-img>
+      </div>
+    </div>
+  </v-sheet>
+</template>

@@ -1,0 +1,24 @@
+{
+  "name": "@carbon/nuxt",
+  "version": "1.2.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/google-gtag": "^1.0.4",
+    "date-fns": "^2.18.0",
+    "lodash": "^4.17.15",
+    "nuxt": "^2.14.6"
+  },
+  "devDependencies": {
+    "@indielayer/eslint-config-vue": "^1.0.0",
+    "@nuxtjs/vuetify": "^1.11.3",
+    "eslint": "^6.8.0",
+    "sass": "^1.30.0",
+    "sass-loader": "^10.1.1"
+  }
+}
