@@ -1,6 +1,8 @@
 import config from './src/configs'
 
 const { gaId } = config.analytics
+const isDev = process.env.NODE_ENV === 'development'
+const baseUrl = isDev ? 'http://localhost:3000' : 'https://familycarousel.com'
 
 export default {
   // ssr: false,
@@ -8,12 +10,12 @@ export default {
   srcDir: 'src/',
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    titleTemplate: '%s - nuxt',
-    title: 'nuxt',
+    titleTemplate: '%s - Family Carousel',
+    title: 'Family Carousel',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      { hid: 'description', name: 'description', content: 'Tools to run a family with some automation built in' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -26,6 +28,15 @@ export default {
   css: [
     '~/assets/scss/theme.scss'
   ],
+
+  loading: { color: '#fff' },
+
+  vue: {
+    config: {
+      productionTip: true,
+      devtools: true
+    }
+  },
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
@@ -56,7 +67,17 @@ export default {
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
-    '@nuxtjs/google-gtag'
+    '@nuxtjs/google-gtag',
+    '@nuxtjs/proxy',
+    '@nuxtjs/axios',
+    '@nuxt/image',
+    [
+      'nuxt-validate',
+      {
+        lang: 'en'
+        // regular vee-validate options
+      }
+    ],
   ],
 
   'google-gtag': {
@@ -67,5 +88,37 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
+  },
+
+  proxy: {
+
+  },
+
+  axios: {
+    proxy: true
+  },
+
+  publicRuntimeConfig: {
+    NUXT_BASE_URL: baseUrl,
+    axios: {
+      browserBaseURL: baseUrl
+    }
+  },
+
+  privateRuntimeConfig: {
+    axios: {
+      baseURL: baseUrl
+    }
+  },
+  pageTransition: {
+    name: 'default-page',
+    mode: 'out-in',
+    beforeEnter(el) {
+      console.log('Before enter...')
+    }
+  },
+  layoutTransition: {
+    name: 'default-layouts',
+    mode: 'out-in'
   }
 }
