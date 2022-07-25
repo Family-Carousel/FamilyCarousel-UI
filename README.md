@@ -1,12 +1,4 @@
-### Carbon UI Kit
-| https://indielayer.com
-
-- Vue UI Kit
-- Vuetify - Number #1 UI Vue Component Library
-
-### Documentation
-
-See - `CarbonUI-Documentation.pdf`
+# Family Carousel UI
 
 ## Commands
 #### `yarn`
