@@ -36,7 +36,12 @@ module.exports = {
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: ["~/assets/scss/theme.scss"],
 
-  loading: { color: "#fff" },
+  loading: { 
+    color: "blue",
+    height: '5px',
+    continuous: true,
+    trottle: 75
+  },
 
   vue: {
     config: {

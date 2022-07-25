@@ -43,7 +43,6 @@ functions:
 
 plugins:
   - serverless-plugin-common-excludes
-  # - serverless-plugin-include-dependencies
   - serverless-domain-manager
   - serverless-apigw-binary
   - serverless-offline

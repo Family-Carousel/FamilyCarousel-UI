@@ -43,7 +43,7 @@ jobs:
     - name: serverless create_domain dev
       uses: serverless/github-action@v3.1
       with:
-        args: create_domain --param='stage=dev'"
+        args: create_domain --stage=dev"
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -51,7 +51,7 @@ jobs:
     - name: serverless deploy dev
       uses: serverless/github-action@v3.1
       with:
-        args: deploy --param='stage=dev'"
+        args: deploy --stage=dev"
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -59,7 +59,7 @@ jobs:
     - name: serverless create_domain prod
       uses: serverless/github-action@v3.1
       with:
-        args: create_domain --param='stage=prod'"
+        args: create_domain --stage=prod"
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -67,7 +67,7 @@ jobs:
     - name: serverless deploy prod
       uses: serverless/github-action@v3.1
       with:
-        args: deploy --param='stage=prod'"
+        args: deploy --stage=prod"
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
