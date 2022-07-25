@@ -107,10 +107,10 @@ export default {
     };
   },
   methods: {
-    login() {
+    async login() {
       await this.$auth.loginWith('auth0');
     },
-    logout() {
+    async logout() {
       await this.$auth.logout();
     }
   }
