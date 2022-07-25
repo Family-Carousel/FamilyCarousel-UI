@@ -10,6 +10,7 @@ provider:
   stage: ${opt:stage, 'dev'}  
   region: us-east-1
   logRetentionInDays: 3
+  timeout: 29
   memorySize: 1024
   environment:
     NODE_ENV: ${self:provider.stage}
@@ -41,26 +42,31 @@ functions:
           cors: true
 
 plugins:
+  - serverless-plugin-common-excludes
+  # - serverless-plugin-include-dependencies
   - serverless-domain-manager
   - serverless-apigw-binary
   - serverless-offline
 
 package:
   individually: true
-  excludeDevDependencies: true
+  excludeDevDependencies: false
   patterns:
     - '!src/**'
     - '!.nuxt/**'
-    - '!package.json'
-    - '!yarn.lock'
-    - '!.gitignore'
-    - '!README.md'
-    - '!.eslintrc.js'
-    - '!.editorconfig'
     - 'src/static/**'
     - '.nuxt/dist/**'
+    # - 'node_modules/@nuxtjs/vuetify/**'
+    # - 'node_modules/@nuxtjs/google-gtag/**'
+    # - 'node_modules/@nuxtjs/proxy/**'
+    # - 'node_modules/@nuxtjs/axios/**'
+    # - 'node_modules/@nuxt/image/**'
+    # - 'node_modules/nuxt-validate/**'
+    # - 'node_modules/vee-validate/**'
 
 custom:
+  includeDependencies:
+    enableCaching: true
   apigwBinary:
     types:
       - "*/*"
@@ -78,4 +84,4 @@ custom:
     basePath: ''
     stage: ${self:provider.stage}
     createRoute53Record: false
-    certificateName: 
+    certificateName: ${self:custom.certMap.${self:provider.stage}}

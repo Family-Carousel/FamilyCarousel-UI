@@ -74,6 +74,12 @@ module.exports = {
       },
     ],
   ],
+  
+  render: {
+    bundleRenderer: {
+      runInNewContext: false
+    }
+  },
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
