@@ -1,12 +1,11 @@
-import icons from './icons'
-import theme from './theme'
-import analytics from './analytics'
+import icons from "./icons";
+import theme from "./theme";
 
 export default {
   // product display information
   product: {
-    name: 'Carbon UI',
-    version: 'v1.2.0'
+    name: "Family Carousel",
+    version: "v1.0.0",
   },
 
   // icon libraries
@@ -14,7 +13,4 @@ export default {
 
   // theme configs
   theme,
-
-  // analytics configs
-  analytics
-}
+};

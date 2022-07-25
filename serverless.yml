@@ -1,0 +1,81 @@
+service: FamilyCarousel-Ui
+
+frameworkVersion: ^3.21.0
+configValidationMode: error
+deprecationNotificationMode: error
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  stage: ${opt:stage, 'dev'}  
+  region: us-east-1
+  logRetentionInDays: 3
+  memorySize: 1024
+  environment:
+    NODE_ENV: ${self:provider.stage}
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+  apiGateway:
+    shouldStartNameWithService: true
+  iam: 
+    role:
+      statements:
+        - Action:
+            - lambda:InvokeAsync
+            - lambda:InvokeFunction
+          Effect: Allow
+          Resource: '*'
+
+functions:
+  nuxt:
+    handler: handler.nuxt
+    name: ${self:provider.stage}-familycarousel-nuxt
+    description: Aws lambda function servicing up serverless nuxt SSR site for family carousel
+    events:
+      - http: 
+          path: /
+          method: ANY
+          cors: true
+      - http: 
+          path: /{proxy+}
+          method: ANY
+          cors: true
+
+plugins:
+  - serverless-domain-manager
+  - serverless-apigw-binary
+  - serverless-offline
+
+package:
+  individually: true
+  excludeDevDependencies: true
+  patterns:
+    - '!src/**'
+    - '!.nuxt/**'
+    - '!package.json'
+    - '!yarn.lock'
+    - '!.gitignore'
+    - '!README.md'
+    - '!.eslintrc.js'
+    - '!.editorconfig'
+    - 'src/static/**'
+    - '.nuxt/dist/**'
+
+custom:
+  apigwBinary:
+    types:
+      - "*/*"
+  serverless-offline:
+    noPrependStageInUrl: true
+  domainMap: 
+    dev: dev.familycarousel.com
+    prod: familycarousel.com
+  certMap:
+    dev: '*.familycarousel.com'
+    prod: '*.familycarousel.com'
+  customDomain:
+    domainName: ${self:custom.domainMap.${self:provider.stage}}
+    endpointType: regional
+    basePath: ''
+    stage: ${self:provider.stage}
+    createRoute53Record: false
+    certificateName: 

@@ -26,37 +26,37 @@ export default {
     return {
       features: [
         {
-          icon: "mdi-account-check-outline",
+          icon: "mdi-calendar-month",
           title: "Calendars",
           description:
             "Individual Member and Family calendars available to scheduling and planning events for yourself and your family",
         },
         {
-          icon: "mdi-lifebuoy",
+          icon: "mdi-playlist-edit",
           title: "Lists",
           description:
             "Create lists to help you remember, prioritize, arrange and provide a simple structure to you and your families day",
         },
         {
-          icon: "mdi-email-open-multiple-outline",
-          title: "Alerts",
+          icon: "mdi-bell",
+          title: "Notifications",
           description:
-            "Receive alerts for a scheduled event. Alerts for individuals and families to keep things organized",
+            "Receive Notifications for a scheduled event. Notifications for individuals and families to keep things organized",
         },
         {
-          icon: "mdi-clock-outline",
+          icon: "mdi-cake",
           title: "Birthdays",
           description:
             "As members are added to your family birthdays are added to the calender. We will remind you and help celebrate",
         },
         {
-          icon: "mdi-twitter",
+          icon: "mdi-cart",
           title: "Meal and Grocery Planning",
           description:
             "Unique features for meal planning available to your family. Grocery shopping made easy with meal planner integration",
         },
         {
-          icon: "mdi-chart-box-outline",
+          icon: "mdi-pill",
           title: "Perscription Tracker",
           description:
             "Input perscriptions for individual members. receive alerts to take your medicine and when they should be refilled",
