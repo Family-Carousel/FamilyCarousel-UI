@@ -2,8 +2,6 @@ const isDev = process.env.NODE_ENV === "development";
 const baseUrl = isDev ? "http://localhost:3000" : "https://familycarousel.com";
 
 module.exports = {
-  // ssr: false,
-  // target: 'static',
   srcDir: "src/",
   telemetry: false,
   // Global page headers (https://go.nuxtjs.dev/config-head)
@@ -91,6 +89,7 @@ module.exports = {
     "@nuxtjs/google-gtag",
     "@nuxtjs/proxy",
     "@nuxtjs/axios",
+    '@nuxtjs/auth-next',
     "@nuxt/image",
     [
       "nuxt-validate",
@@ -106,6 +105,21 @@ module.exports = {
     debug: true, // enable to track in dev mode
     disableAutoPageTrack: false, // disable if you don't want to track each page route with router.afterEach(...).
   },
+
+  auth: {
+    strategies: {
+      auth0: {
+        domain: process.env.AUTH_DOMAIN,
+        clientId: process.env.AUTH_CLIENT_ID,
+        audience: process.env.AUTH_AUDIENCE,
+        scope: ['openid', 'profile', 'email', 'offline_access'],
+        responseType: 'code',
+        grantType: 'authorization_code',
+        codeChallengeMethod: 'S256',
+        logoutRedirectUri: process.env.LOGOUT_REDIRECT_URL,
+      }
+    }
+  },  
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {},

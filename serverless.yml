@@ -14,7 +14,11 @@ provider:
   memorySize: 1024
   environment:
     NODE_ENV: ${self:provider.stage}
-    AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1,
+    AUTH_DOMAIN: ${self:custom.authDomainMap.${self:provider.stage}}
+    AUTH_CLIENT_ID: ${self:custom.authClientIdMap.${self:provider.stage}}
+    AUTH_AUDIENCE: ${self:custom.authAudienceMap.${self:provider.stage}}
+    LOGOUT_REDIRECT_URL: ${self:custom.logoutRedirectUrlMap.${self:provider.stage}}
   apiGateway:
     shouldStartNameWithService: true
   iam: 
@@ -77,6 +81,18 @@ custom:
   certMap:
     dev: '*.familycarousel.com'
     prod: '*.familycarousel.com'
+  authDomainMap: 
+    dev: familycarousel-dev.us.auth0.com
+    prod: familycarousel.us.auth0.com
+  authClientIdMap:
+    dev: JNJlXp4LPuZ9BNjYVojqQis8QvKf8Fym
+    prod: ''
+  authAudienceMap:
+    dev: https://dev.api.familycarousel.com
+    prod: https://api.familycarousel.com
+  logoutRedirectUrlMap:
+    dev: https://dev.api.familycarousel.com
+    prod: https://api.familycarousel.com
   customDomain:
     domainName: ${self:custom.domainMap.${self:provider.stage}}
     endpointType: regional
