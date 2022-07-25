@@ -1,6 +1,3 @@
-const isDev = process.env.NODE_ENV === "development";
-const baseUrl = isDev ? "http://localhost:3000" : "https://familycarousel.com";
-
 module.exports = {
   srcDir: "src/",
   telemetry: false,
@@ -109,14 +106,14 @@ module.exports = {
   auth: {
     strategies: {
       auth0: {
-        domain: process.env.AUTH_DOMAIN,
-        clientId: process.env.AUTH_CLIENT_ID,
-        audience: process.env.AUTH_AUDIENCE,
+        domain: process.env.NUXT_ENV_AUTH_DOMAIN,
+        clientId: process.env.NUXT_ENV_AUTH_CLIENT_ID,
+        audience: process.env.NUXT_ENV_AUTH_AUDIENCE,
         scope: ['openid', 'profile', 'email', 'offline_access'],
         responseType: 'code',
         grantType: 'authorization_code',
         codeChallengeMethod: 'S256',
-        logoutRedirectUri: process.env.LOGOUT_REDIRECT_URL,
+        logoutRedirectUri: process.env.NUXT_ENV_LOGOUT_REDIRECT_URL,
       }
     }
   },  
@@ -131,15 +128,15 @@ module.exports = {
   },
 
   publicRuntimeConfig: {
-    NUXT_BASE_URL: baseUrl,
+    NUXT_BASE_URL: process.env.NUXT_ENV_DOMAIN,
     axios: {
-      browserBaseURL: baseUrl,
+      browserBaseURL: process.env.NUXT_ENV_DOMAIN,
     },
   },
 
   privateRuntimeConfig: {
     axios: {
-      baseURL: baseUrl,
+      baseURL: process.env.NUXT_ENV_DOMAIN,
     },
   },
   pageTransition: {
