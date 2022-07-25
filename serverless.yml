@@ -14,7 +14,7 @@ provider:
   timeout: 29
   memorySize: 1024
   environment:
-    NODE_ENV: production
+    NODE_ENV: ${env:NODE_ENV}
     AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1,
     NUXT_ENV_AUTH_DOMAIN: ${env:NUXT_ENV_AUTH_DOMAIN}
     NUXT_ENV_AUTH_CLIENT_ID: ${env:NUXT_ENV_AUTH_CLIENT_ID}
