@@ -104,7 +104,12 @@ module.exports = {
   },
 
   auth: {
+    redirect: {
+      login: '/', // redirect user when not connected
+      callback: '/login'
+    },
     strategies: {
+      local: false,
       auth0: {
         domain: process.env.NUXT_ENV_AUTH_DOMAIN,
         clientId: process.env.NUXT_ENV_AUTH_CLIENT_ID,
