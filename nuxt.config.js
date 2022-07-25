@@ -105,8 +105,10 @@ module.exports = {
 
   auth: {
     redirect: {
-      login: '/', // redirect user when not connected
-      callback: '/login'
+      login: '/auth/loggedin',
+      callback: '/auth/loggedin',
+      home: '/',
+      logout: '/'
     },
     strategies: {
       local: false,
