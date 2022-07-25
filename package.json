@@ -1,7 +1,11 @@
 {
-  "name": "@carbon/nuxt",
-  "version": "1.2.0",
+  "name": "@familycarousel/familycarousel-ui",
+  "version": "1.0.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Family-Carousel/FamilyCarousel-UI"
+  },
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
