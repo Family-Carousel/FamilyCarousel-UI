@@ -1,26 +1,26 @@
-name: Nuxt Pipeline
+name: Dev Nuxt Pipeline
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: 
+      - '!main'
 
 jobs:
   build:
-
     runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: [12]
+        node: [16]
+
     steps:
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
+
     - name: Get yarn cache directory path
       id: yarn-cache-dir-path
       run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -40,7 +40,7 @@ jobs:
     - name: Build Nuxt
       run: yarn build
       
-    - name: serverless create_domain dev
+    - name: serverless create_domain
       uses: serverless/github-action@v3.1
       with:
         args: create_domain --stage=dev"
@@ -48,27 +48,10 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         
-    - name: serverless deploy dev
+    - name: serverless deploy
       uses: serverless/github-action@v3.1
       with:
         args: deploy --stage=dev"
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-
-    - name: serverless create_domain prod
-      uses: serverless/github-action@v3.1
-      with:
-        args: create_domain --stage=prod"
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        
-    - name: serverless deploy prod
-      uses: serverless/github-action@v3.1
-      with:
-        args: deploy --stage=prod"
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-
