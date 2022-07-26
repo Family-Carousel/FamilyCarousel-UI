@@ -2,8 +2,8 @@ name: Dev Nuxt Pipeline
 
 on:
   push:
-    branches: 
-      - '!main'
+    branches-ignore:
+      - main
 
 jobs:
   build:
@@ -38,7 +38,7 @@ jobs:
       run: yarn
       
     - name: Build Nuxt
-      run: yarn build
+      run: yarn build --dotenv .env.dev
       
     - name: serverless create_domain
       uses: serverless/github-action@v3.1

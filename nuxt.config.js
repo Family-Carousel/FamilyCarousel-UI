@@ -1,9 +1,4 @@
-const isDev = process.env.NODE_ENV === "development";
-const baseUrl = isDev ? "http://localhost:3000" : "https://familycarousel.com";
-
 module.exports = {
-  // ssr: false,
-  // target: 'static',
   srcDir: "src/",
   telemetry: false,
   // Global page headers (https://go.nuxtjs.dev/config-head)
@@ -80,17 +75,18 @@ module.exports = {
     ],
   ],
   
-  render: {
-    bundleRenderer: {
-      runInNewContext: false
-    }
-  },
+  // render: {
+  //   bundleRenderer: {
+  //     runInNewContext: false
+  //   }
+  // },
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
     "@nuxtjs/google-gtag",
     "@nuxtjs/proxy",
     "@nuxtjs/axios",
+    '@nuxtjs/auth-next',
     "@nuxt/image",
     [
       "nuxt-validate",
@@ -107,6 +103,28 @@ module.exports = {
     disableAutoPageTrack: false, // disable if you don't want to track each page route with router.afterEach(...).
   },
 
+  auth: {
+    redirect: {
+      login: '/auth/loggedin',
+      callback: '/auth/loggedin',
+      home: '/',
+      logout: '/'
+    },
+    strategies: {
+      local: false,
+      auth0: {
+        domain: process.env.NUXT_ENV_AUTH_DOMAIN,
+        clientId: process.env.NUXT_ENV_AUTH_CLIENT_ID,
+        audience: process.env.NUXT_ENV_AUTH_AUDIENCE,
+        scope: ['openid', 'profile', 'email', 'offline_access'],
+        responseType: 'code',
+        grantType: 'authorization_code',
+        codeChallengeMethod: 'S256',
+        logoutRedirectUri: process.env.NUXT_ENV_LOGOUT_REDIRECT_URL,
+      }
+    }
+  },  
+
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {},
 
@@ -117,15 +135,15 @@ module.exports = {
   },
 
   publicRuntimeConfig: {
-    NUXT_BASE_URL: baseUrl,
+    NUXT_BASE_URL: process.env.NUXT_ENV_DOMAIN,
     axios: {
-      browserBaseURL: baseUrl,
+      browserBaseURL: process.env.NUXT_ENV_DOMAIN,
     },
   },
 
   privateRuntimeConfig: {
     axios: {
-      baseURL: baseUrl,
+      baseURL: process.env.NUXT_ENV_DOMAIN,
     },
   },
   pageTransition: {

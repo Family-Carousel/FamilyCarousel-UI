@@ -1,5 +1,5 @@
 <template>
-  <LazyHydrate when-visible>
+  <LazyHydrate ssr-only>
     <v-sheet color="transparent">
       <v-container class="py-4 py-lg-8">
         <v-row>

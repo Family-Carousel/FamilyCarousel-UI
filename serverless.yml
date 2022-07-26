@@ -3,28 +3,33 @@ service: FamilyCarousel-Ui
 frameworkVersion: ^3.21.0
 configValidationMode: error
 deprecationNotificationMode: error
+useDotenv: true
 
 provider:
   name: aws
   runtime: nodejs16.x
-  stage: ${opt:stage, 'dev'}  
+  stage: ${opt:stage, 'dev'}
   region: us-east-1
   logRetentionInDays: 3
   timeout: 29
   memorySize: 1024
   environment:
-    NODE_ENV: ${self:provider.stage}
-    AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+    NODE_ENV: ${env:NODE_ENV}
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1,
+    NUXT_ENV_AUTH_DOMAIN: ${env:NUXT_ENV_AUTH_DOMAIN}
+    NUXT_ENV_AUTH_CLIENT_ID: ${env:NUXT_ENV_AUTH_CLIENT_ID}
+    NUXT_ENV_AUTH_AUDIENCE: ${env:NUXT_ENV_AUTH_AUDIENCE}
+    NUXT_ENV_LOGOUT_REDIRECT_URL: ${env:NUXT_ENV_LOGOUT_REDIRECT_URL}
   apiGateway:
     shouldStartNameWithService: true
-  iam: 
+  iam:
     role:
       statements:
         - Action:
             - lambda:InvokeAsync
             - lambda:InvokeFunction
           Effect: Allow
-          Resource: '*'
+          Resource: "*"
 
 functions:
   nuxt:
@@ -32,11 +37,11 @@ functions:
     name: ${self:provider.stage}-familycarousel-nuxt
     description: Aws lambda function servicing up serverless nuxt SSR site for family carousel
     events:
-      - http: 
+      - http:
           path: /
           method: ANY
           cors: true
-      - http: 
+      - http:
           path: /{proxy+}
           method: ANY
           cors: true
@@ -51,17 +56,10 @@ package:
   individually: true
   excludeDevDependencies: false
   patterns:
-    - '!src/**'
-    - '!.nuxt/**'
-    - 'src/static/**'
-    - '.nuxt/dist/**'
-    # - 'node_modules/@nuxtjs/vuetify/**'
-    # - 'node_modules/@nuxtjs/google-gtag/**'
-    # - 'node_modules/@nuxtjs/proxy/**'
-    # - 'node_modules/@nuxtjs/axios/**'
-    # - 'node_modules/@nuxt/image/**'
-    # - 'node_modules/nuxt-validate/**'
-    # - 'node_modules/vee-validate/**'
+    - "!src/**"
+    - "!.nuxt/**"
+    - "src/static/**"
+    - ".nuxt/dist/**"
 
 custom:
   includeDependencies:
@@ -71,16 +69,16 @@ custom:
       - "*/*"
   serverless-offline:
     noPrependStageInUrl: true
-  domainMap: 
+  domainMap:
     dev: dev.familycarousel.com
     prod: familycarousel.com
   certMap:
-    dev: '*.familycarousel.com'
-    prod: '*.familycarousel.com'
+    dev: "*.familycarousel.com"
+    prod: "*.familycarousel.com"
   customDomain:
     domainName: ${self:custom.domainMap.${self:provider.stage}}
     endpointType: regional
-    basePath: ''
+    basePath: ""
     stage: ${self:provider.stage}
     createRoute53Record: false
     certificateName: ${self:custom.certMap.${self:provider.stage}}
