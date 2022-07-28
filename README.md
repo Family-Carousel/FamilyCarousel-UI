@@ -11,3 +11,6 @@
 
 #### `yarn build`
 > Compiles and minifies for production
+
+## Auth
+Auth0 is used for user auth for API and frontend
