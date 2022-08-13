@@ -59,6 +59,7 @@ package:
     - "!src/**"
     - "!.nuxt/**"
     - "src/static/**"
+    - "src/server/**"
     - ".nuxt/dist/**"
 
 custom:

@@ -16,16 +16,25 @@
           live, subscribe to our mailing list!
         </h2>
         <div class="mt-4">
-          <div class="d-flex flex-column flex-sm-row w-full w-lg-half">
-            <v-text-field
-              outlined
-              solo
-              label="Email"
-              height="64"
-              class="mr-sm-2"
-            ></v-text-field>
-            <v-btn x-large color="secondary">Subscribe</v-btn>
-          </div>
+          <ValidationObserver ref="obs" v-slot="{ invalid, validated }">
+            <div class="d-flex flex-column flex-sm-row w-full w-lg-half">
+              <VTextFieldWithValidation
+                outlined
+                rules="required|email"
+                solo
+                label="Email"
+                v-model="emailAddress"
+                class="mr-sm-2 d-flex flex-column flex-sm-row w-full w-lg-half"
+              ></VTextFieldWithValidation>
+              <v-btn
+                x-large
+                :disabled="invalid || !validated"
+                color="secondary"
+                @click.prevent="subscribe()"
+                >Subscribe</v-btn
+              >
+            </div>
+          </ValidationObserver>
         </div>
       </v-container>
     </v-sheet>
@@ -34,10 +43,31 @@
 
 <script>
 import LazyHydrate from "vue-lazy-hydration";
+import { ValidationObserver } from "vee-validate";
+import VTextFieldWithValidation from "../inputs/VTextFieldWithValidation.vue";
 
 export default {
   components: {
     LazyHydrate,
+    VTextFieldWithValidation,
+    ValidationObserver,
+  },
+  data: () => ({
+    emailAddress: "",
+    launchSubscriptionListId: "3a6b58bc2f",
+  }),
+  methods: {
+    async subscribe() {
+      console.log(this.$store.state);
+
+      const result = await this.$axios.post("/api/newsletter/subscribe", {
+        subscriptionInformation: {
+          listId: this.launchSubscriptionListId,
+          emailAddress: this.emailAddress,
+        },
+        _csrf: this.$store.state.csrfToken,
+      });
+    },
   },
 };
 </script>

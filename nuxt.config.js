@@ -56,6 +56,10 @@ module.exports = {
     { src: "~/filters/formatDate.js" },
   ],
 
+  serverMiddleware: [
+    { path: '/api', handler: '~/server/start.js' }
+  ],
+
   // Auto import components (https://go.nuxtjs.dev/config-components)
   // components: true,
 
@@ -84,6 +88,7 @@ module.exports = {
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
     "@nuxtjs/google-gtag",
+    'cookie-universal-nuxt',
     "@nuxtjs/proxy",
     "@nuxtjs/axios",
     '@nuxtjs/auth-next',

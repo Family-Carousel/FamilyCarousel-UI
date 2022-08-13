@@ -12,6 +12,13 @@ const state = () => ({
 
   // themes and layout configurations
   isRTL,
+
+  csrfToken: "",
+  pageLoading: false,
+  notification: {
+    type: "",
+    message: "",
+  },
 });
 
 const mutations = {
@@ -22,6 +29,21 @@ const mutations = {
   setRTL: function (state, isRTL) {
     this.app.vuetify.framework.rtl = isRTL;
     state.isRTL = isRTL;
+  },
+  setCsrfToken(state, csrfToken) {
+    state.csrfToken = csrfToken;
+  },
+  setPageLoading(state, flag) {
+    state.pageLoading = flag;
+  },
+  setPageData(state, { page, data }) {
+    state[page] = data;
+  },
+  setNotification(state, { type, message }) {
+    state.notification = { type, message };
+  },
+  unsetNotification(state) {
+    state.notification = { type: "", message: "" };
   },
 };
 
