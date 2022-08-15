@@ -58,14 +58,17 @@ export default {
   }),
   methods: {
     async subscribe() {
-      console.log(this.$store.state);
-
       const result = await this.$axios.post("/api/newsletter/subscribe", {
         subscriptionInformation: {
           listId: this.launchSubscriptionListId,
           emailAddress: this.emailAddress,
         },
         _csrf: this.$store.state.csrfToken,
+      });
+
+      this.$store.commit("snackbar/showMessage", {
+        content: result.message,
+        color: result.status,
       });
     },
   },
