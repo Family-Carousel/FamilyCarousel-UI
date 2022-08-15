@@ -89,7 +89,7 @@ module.exports = {
   modules: [
     "@nuxtjs/google-gtag",
     'cookie-universal-nuxt',
-    "@nuxtjs/proxy",
+    // "@nuxtjs/proxy",
     "@nuxtjs/axios",
     '@nuxtjs/auth-next',
     "@nuxt/image",
@@ -133,10 +133,10 @@ module.exports = {
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {},
 
-  proxy: {},
+  // proxy: {},
 
   axios: {
-    proxy: true,
+    // proxy: false,
     baseURL: process.env.NUXT_ENV_DOMAIN,
     credentials: true
   },
