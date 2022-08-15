@@ -137,20 +137,20 @@ module.exports = {
 
   axios: {
     // proxy: false,
-    baseURL: process.env.NUXT_ENV_DOMAIN_HTTP,
+    baseURL: process.env.NUXT_ENV_DOMAIN_HTTPS,
     credentials: true
   },
 
   publicRuntimeConfig: {
-    NUXT_BASE_URL: process.env.NUXT_ENV_DOMAIN_HTTP,
+    NUXT_BASE_URL: process.env.NUXT_ENV_DOMAIN_HTTPS,
     axios: {
-      browserBaseURL: process.env.NUXT_ENV_DOMAIN_HTTP,
+      browserBaseURL: process.env.NUXT_ENV_DOMAIN_HTTPS,
     },
   },
 
   privateRuntimeConfig: {
     axios: {
-      baseURL: process.env.NUXT_ENV_DOMAIN_HTTP,
+      baseURL: process.env.NUXT_ENV_DOMAIN_HTTPS,
     },
   },
   pageTransition: {
