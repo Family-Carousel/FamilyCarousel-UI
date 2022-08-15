@@ -137,7 +137,8 @@ module.exports = {
 
   axios: {
     proxy: true,
-    baseURL: process.env.NUXT_ENV_DOMAIN
+    baseURL: process.env.NUXT_ENV_DOMAIN,
+    credentials: true
   },
 
   publicRuntimeConfig: {
