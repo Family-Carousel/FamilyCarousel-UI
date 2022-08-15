@@ -46,7 +46,7 @@ jobs:
       run: yarn
       
     - name: Build Nuxt
-      run: yarn build --dotenv .env.prod
+      run: yarn build
       
     - name: serverless create_domain
       uses: serverless/github-action@v3.1
