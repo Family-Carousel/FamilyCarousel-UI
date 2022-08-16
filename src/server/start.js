@@ -3,6 +3,9 @@
 require("./utils/globalsAndEnv");
 const createApp = require("./app");
 
+console.log("server starting");
+logger.log("Global Logger Enabled");
+
 process.on("uncaughtException", (err) => {
   logger.error("uncaughtException", err);
   process.exitCode = 1;

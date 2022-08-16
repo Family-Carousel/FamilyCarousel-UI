@@ -6,10 +6,9 @@ module.exports = {
     port: "80",
   },
   performance: {
-    gzip: false
+    gzip: false,
   },
   dev: process.env.NODE_ENV !== "production",
-  // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     titleTemplate: "%s - Family Carousel",
     title: "Family Carousel",
@@ -32,30 +31,22 @@ module.exports = {
         rel: "",
         href: "https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css",
       },
-      // ...config.icons.map((href) => ({ rel: "stylesheet", href })),
     ],
   },
-
-  // Global CSS (https://go.nuxtjs.dev/config-css)
   css: ["~/assets/scss/theme.scss"],
-
   loading: {
     color: "blue",
     height: "5px",
     continuous: true,
     trottle: 75,
   },
-
   vue: {
     config: {
       productionTip: true,
       devtools: true,
     },
   },
-
-  // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
-    // filters
     { src: "~/filters/capitalize.js" },
     { src: "~/filters/lowercase.js" },
     { src: "~/filters/uppercase.js" },
@@ -63,15 +54,8 @@ module.exports = {
     { src: "~/filters/placeholder.js" },
     { src: "~/filters/formatDate.js" },
   ],
-
   serverMiddleware: [{ path: "/api", handler: "~/server/start.js" }],
-
-  // Auto import components (https://go.nuxtjs.dev/config-components)
-  // components: true,
-
-  // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
-    // https://go.nuxtjs.dev/vuetify
     [
       "@nuxtjs/vuetify",
       {
@@ -84,14 +68,6 @@ module.exports = {
       },
     ],
   ],
-
-  // render: {
-  //   bundleRenderer: {
-  //     runInNewContext: false
-  //   }
-  // },
-
-  // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
     "@nuxtjs/google-gtag",
     "cookie-universal-nuxt",
@@ -103,17 +79,14 @@ module.exports = {
       "nuxt-validate",
       {
         lang: "en",
-        // regular vee-validate options
       },
     ],
   ],
-
   "google-gtag": {
     id: "gaId",
-    debug: true, // enable to track in dev mode
-    disableAutoPageTrack: false, // disable if you don't want to track each page route with router.afterEach(...).
+    debug: true,
+    disableAutoPageTrack: false,
   },
-
   auth: {
     redirect: {
       login: "/auth/loggedin",
@@ -135,25 +108,19 @@ module.exports = {
       },
     },
   },
-
-  // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {},
-
   // proxy: {},
-
   axios: {
     // proxy: false,
     baseURL: process.env.NUXT_ENV_DOMAIN_HTTPS,
     credentials: true,
   },
-
   publicRuntimeConfig: {
     NUXT_BASE_URL: process.env.NUXT_ENV_DOMAIN_HTTPS,
     axios: {
       browserBaseURL: process.env.NUXT_ENV_DOMAIN_HTTPS,
     },
   },
-
   privateRuntimeConfig: {
     axios: {
       baseURL: process.env.NUXT_ENV_DOMAIN_HTTPS,
@@ -162,9 +129,6 @@ module.exports = {
   pageTransition: {
     name: "default-page",
     mode: "out-in",
-    // beforeEnter(el) {
-    //   console.log("Before enter...");
-    // },
   },
   layoutTransition: {
     name: "default-layouts",
