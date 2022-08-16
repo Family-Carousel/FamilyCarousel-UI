@@ -2,7 +2,6 @@
 
 require("./utils/globalsAndEnv");
 const createApp = require("./app");
-const logger = require("./services/helpers/logger");
 
 console.log("Server Starting");
 logger.log("Global Logger Enabled");
