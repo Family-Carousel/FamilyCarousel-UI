@@ -25,6 +25,7 @@
 import LazyHydrate from "vue-lazy-hydration";
 
 export default {
+  name: "Homepage-CallToAction",
   components: {
     LazyHydrate,
   },

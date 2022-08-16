@@ -47,6 +47,7 @@ import { ValidationObserver } from "vee-validate";
 import VTextFieldWithValidation from "../inputs/VTextFieldWithValidation.vue";
 
 export default {
+  name: "Homepage-Hero",
   components: {
     LazyHydrate,
     VTextFieldWithValidation,

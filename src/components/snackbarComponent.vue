@@ -11,6 +11,7 @@
 import LazyHydrate from "vue-lazy-hydration";
 
 export default {
+  name: "Snackbar",
   components: {
     LazyHydrate,
   },
