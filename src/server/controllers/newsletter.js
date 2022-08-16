@@ -32,7 +32,7 @@ exports.subscribe = async (req, res, next) => {
       res.json({
         status: "error",
         error: err,
-        message: errorResponse.detail.split(".")[0],
+        message: errorResponse.detail.split(". ")[0],
       });
     });
 };
