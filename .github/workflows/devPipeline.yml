@@ -16,11 +16,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-
+    
     - name: Get yarn cache directory path
       id: yarn-cache-dir-path
       run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -37,8 +38,11 @@ jobs:
     - name: Install dependencies
       run: yarn
       
-    - name: Build Nuxt
-      run: yarn build --dotenv .env.dev
+    - name: Build env and Nuxt
+      run: |
+        echo "$(cat .env.dev)" > .env
+        echo MAILCHIMP_API_KEY=${{ secrets.MAILCHIMP_API_KEY_DEV }} >> .env 
+        yarn build
       
     - name: serverless create_domain
       uses: serverless/github-action@v3.1
@@ -47,6 +51,7 @@ jobs:
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        MAILCHIMP_API_KEY: ${{ secrets.MAILCHIMP_API_KEY_DEV }}
         
     - name: serverless deploy
       uses: serverless/github-action@v3.1
@@ -55,3 +60,4 @@ jobs:
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        MAILCHIMP_API_KEY: ${{ secrets.MAILCHIMP_API_KEY_DEV }}

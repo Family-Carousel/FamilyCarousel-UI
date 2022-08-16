@@ -1,7 +1,14 @@
 module.exports = {
   srcDir: "src/",
   telemetry: false,
-  // Global page headers (https://go.nuxtjs.dev/config-head)
+  server: {
+    host: "0.0.0.0",
+    port: "80",
+  },
+  performance: {
+    gzip: false,
+  },
+  dev: process.env.NODE_ENV !== "production",
   head: {
     titleTemplate: "%s - Family Carousel",
     title: "Family Carousel",
@@ -21,33 +28,25 @@ module.exports = {
         href: "https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;600;700;800;900&display=swap",
       },
       {
-        rel: '',
-        href: 'https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css'
+        rel: "",
+        href: "https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css",
       },
-      // ...config.icons.map((href) => ({ rel: "stylesheet", href })),
     ],
   },
-
-  // Global CSS (https://go.nuxtjs.dev/config-css)
   css: ["~/assets/scss/theme.scss"],
-
-  loading: { 
+  loading: {
     color: "blue",
-    height: '5px',
+    height: "5px",
     continuous: true,
-    trottle: 75
+    trottle: 75,
   },
-
   vue: {
     config: {
       productionTip: true,
       devtools: true,
     },
   },
-
-  // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
-    // filters
     { src: "~/filters/capitalize.js" },
     { src: "~/filters/lowercase.js" },
     { src: "~/filters/uppercase.js" },
@@ -55,13 +54,8 @@ module.exports = {
     { src: "~/filters/placeholder.js" },
     { src: "~/filters/formatDate.js" },
   ],
-
-  // Auto import components (https://go.nuxtjs.dev/config-components)
-  // components: true,
-
-  // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
+  serverMiddleware: [{ path: "/api", handler: "~/server/start.js" }],
   buildModules: [
-    // https://go.nuxtjs.dev/vuetify
     [
       "@nuxtjs/vuetify",
       {
@@ -74,41 +68,42 @@ module.exports = {
       },
     ],
   ],
-  
-  // render: {
-  //   bundleRenderer: {
-  //     runInNewContext: false
-  //   }
-  // },
-
-  // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
     "@nuxtjs/google-gtag",
-    "@nuxtjs/proxy",
-    "@nuxtjs/axios",
-    '@nuxtjs/auth-next',
+    "cookie-universal-nuxt",
+    // "@nuxtjs/proxy",
+    [
+      "@nuxtjs/axios",
+      {
+        // proxy: false,
+        baseURL: process.env.NUXT_ENV_DOMAIN_HTTPS,
+        credentials: true,
+        debug: true,
+        retry: {
+          retries: 3,
+        },
+      },
+    ],
+    "@nuxtjs/auth-next",
     "@nuxt/image",
     [
       "nuxt-validate",
       {
         lang: "en",
-        // regular vee-validate options
       },
     ],
   ],
-
   "google-gtag": {
-    id: 'gaId',
-    debug: true, // enable to track in dev mode
-    disableAutoPageTrack: false, // disable if you don't want to track each page route with router.afterEach(...).
+    id: "gaId",
+    debug: true,
+    disableAutoPageTrack: false,
   },
-
   auth: {
     redirect: {
-      login: '/auth/loggedin',
-      callback: '/auth/loggedin',
-      home: '/',
-      logout: '/'
+      login: "/auth/loggedin",
+      callback: "/auth/loggedin",
+      home: "/",
+      logout: "/",
     },
     strategies: {
       local: false,
@@ -116,42 +111,31 @@ module.exports = {
         domain: process.env.NUXT_ENV_AUTH_DOMAIN,
         clientId: process.env.NUXT_ENV_AUTH_CLIENT_ID,
         audience: process.env.NUXT_ENV_AUTH_AUDIENCE,
-        scope: ['openid', 'profile', 'email', 'offline_access'],
-        responseType: 'code',
-        grantType: 'authorization_code',
-        codeChallengeMethod: 'S256',
+        scope: ["openid", "profile", "email", "offline_access"],
+        responseType: "code",
+        grantType: "authorization_code",
+        codeChallengeMethod: "S256",
         logoutRedirectUri: process.env.NUXT_ENV_LOGOUT_REDIRECT_URL,
-      }
-    }
-  },  
-
-  // Build Configuration (https://go.nuxtjs.dev/config-build)
-  build: {},
-
-  proxy: {},
-
-  axios: {
-    proxy: true,
-  },
-
-  publicRuntimeConfig: {
-    NUXT_BASE_URL: process.env.NUXT_ENV_DOMAIN,
-    axios: {
-      browserBaseURL: process.env.NUXT_ENV_DOMAIN,
+      },
     },
   },
-
-  privateRuntimeConfig: {
+  build: {},
+  // proxy: {},
+  publicRuntimeConfig: {
+    NUXT_BASE_URL: process.env.NUXT_ENV_DOMAIN_HTTPS,
     axios: {
-      baseURL: process.env.NUXT_ENV_DOMAIN,
+      browserBaseURL: process.env.NUXT_ENV_DOMAIN_HTTPS,
+    },
+  },
+  privateRuntimeConfig: {
+    mailchimpApiKey: process.env.MAILCHIMP_API_KEY,
+    axios: {
+      baseURL: process.env.NUXT_ENV_DOMAIN_HTTPS,
     },
   },
   pageTransition: {
     name: "default-page",
     mode: "out-in",
-    beforeEnter(el) {
-      console.log("Before enter...");
-    },
   },
   layoutTransition: {
     name: "default-layouts",

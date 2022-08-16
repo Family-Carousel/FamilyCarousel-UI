@@ -18,6 +18,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
@@ -39,8 +40,11 @@ jobs:
     - name: Install dependencies
       run: yarn
       
-    - name: Build Nuxt
-      run: yarn build --dotenv .env.prod
+    - name: Build env and Nuxt
+      run: |
+        echo "$(cat .env.prod)" > .env
+        echo MAILCHIMP_API_KEY=${{ secrets.MAILCHIMP_API_KEY_PROD }} >> .env 
+        yarn build
       
     - name: serverless create_domain
       uses: serverless/github-action@v3.1
@@ -49,6 +53,7 @@ jobs:
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        MAILCHIMP_API_KEY: ${{ secrets.MAILCHIMP_API_KEY_PROD }}
         
     - name: serverless deploy
       uses: serverless/github-action@v3.1
@@ -57,4 +62,5 @@ jobs:
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        MAILCHIMP_API_KEY: ${{ secrets.MAILCHIMP_API_KEY_PROD }}
 
