@@ -27,6 +27,7 @@ provider:
     NUXT_ENV_DOMAIN: ${env:NUXT_ENV_DOMAIN}
     LOG_LEVEL: ${env:LOG_LEVEL}
     ENV: ${env:ENV}
+    MAILCHIMP_API_KEY: ${env:MAILCHIMP_API_KEY}
   apiGateway:
     shouldStartNameWithService: true
   iam:
