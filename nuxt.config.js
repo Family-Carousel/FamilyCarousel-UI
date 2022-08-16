@@ -128,6 +128,7 @@ module.exports = {
     },
   },
   privateRuntimeConfig: {
+    mailchimpApiKey: process.env.MAILCHIMP_API_KEY,
     axios: {
       baseURL: process.env.NUXT_ENV_DOMAIN_HTTPS,
     },
