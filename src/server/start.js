@@ -4,9 +4,9 @@ require("./utils/globalsAndEnv");
 const createApp = require("./app");
 const logger = require("./services/helpers/logger");
 
-console.log("server starting");
+console.log("Server Starting");
 logger.log("Global Logger Enabled");
-console.log(process.env);
+logger.log(process.env);
 
 process.on("uncaughtException", (err) => {
   logger.error("uncaughtException", err);
