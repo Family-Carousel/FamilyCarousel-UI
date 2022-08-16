@@ -27,12 +27,12 @@ exports.subscribe = async (req, res, next) => {
     })
     .catch((err) => {
       var errorResponse = JSON.parse(err.response.text);
-      logger.log(errorResponse);
+      logger.error(errorResponse);
 
       res.json({
         status: "error",
         error: err,
-        message: errorResponse.detail,
+        message: errorResponse.detail.split(".")[0],
       });
     });
 };
