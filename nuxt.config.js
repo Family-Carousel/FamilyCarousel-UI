@@ -72,7 +72,18 @@ module.exports = {
     "@nuxtjs/google-gtag",
     "cookie-universal-nuxt",
     // "@nuxtjs/proxy",
-    "@nuxtjs/axios",
+    [
+      "@nuxtjs/axios",
+      {
+        // proxy: false,
+        baseURL: process.env.NUXT_ENV_DOMAIN_HTTPS,
+        credentials: true,
+        debug: true,
+        retry: {
+          retries: 3,
+        },
+      },
+    ],
     "@nuxtjs/auth-next",
     "@nuxt/image",
     [
@@ -110,11 +121,6 @@ module.exports = {
   },
   build: {},
   // proxy: {},
-  axios: {
-    // proxy: false,
-    baseURL: process.env.NUXT_ENV_DOMAIN_HTTPS,
-    credentials: true,
-  },
   publicRuntimeConfig: {
     NUXT_BASE_URL: process.env.NUXT_ENV_DOMAIN_HTTPS,
     axios: {
