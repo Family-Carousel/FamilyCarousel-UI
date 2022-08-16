@@ -5,6 +5,12 @@ module.exports = {
     host: "0.0.0.0",
     port: "80",
   },
+  performance: {
+    gzip: false
+  },
+  router: {
+    base: '/dev/'
+  },
   dev: process.env.NODE_ENV !== "production",
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
