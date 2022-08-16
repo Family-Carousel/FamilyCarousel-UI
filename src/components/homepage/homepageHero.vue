@@ -67,8 +67,8 @@ export default {
       });
 
       this.$store.commit("snackbar/showMessage", {
-        content: result.message,
-        color: result.status,
+        content: result.data.message,
+        color: result.data.status,
       });
     },
   },
