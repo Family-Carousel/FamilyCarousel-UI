@@ -26,11 +26,13 @@ exports.subscribe = async (req, res, next) => {
       });
     })
     .catch((err) => {
-      logger.log(err);
+      var errorResponse = JSON.parse(err.text);
+      logger.log(errorResponse);
+
       res.json({
         status: "error",
         error: err,
-        message: `Failed to add email ${subscriptionInformation.emailAddress}`,
+        message: errorResponse.detail,
       });
     });
 };
