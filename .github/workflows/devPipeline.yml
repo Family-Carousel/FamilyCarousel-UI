@@ -41,7 +41,7 @@ jobs:
     - name: Build env and Nuxt
       run: |
         cat .env.dev > .env
-        echo MAILCHIMP_API_KEY=${{ secrets.MAILCHIMP_API_KEY_DEV }} >> .env 
+        echo \nMAILCHIMP_API_KEY=${{ secrets.MAILCHIMP_API_KEY_DEV }} >> .env 
         cat .env
         yarn build
       
