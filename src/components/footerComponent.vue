@@ -40,6 +40,7 @@
 import LazyHydrate from "vue-lazy-hydration";
 
 export default {
+  name: "Footer",
   components: {
     LazyHydrate,
   },

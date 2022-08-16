@@ -23,7 +23,12 @@
     </LazyHydrate>
 
     <LazyHydrate when-visible>
-      <v-btn class="d-md-none drawer-button" v-if="menu && menu.length && menu.length > 0" rounded @click="drawer = !drawer">
+      <v-btn
+        class="d-md-none drawer-button"
+        v-if="menu && menu.length && menu.length > 0"
+        rounded
+        @click="drawer = !drawer"
+      >
         <v-icon right>mdi-menu</v-icon>
       </v-btn>
     </LazyHydrate>
@@ -55,11 +60,21 @@
 
           <v-spacer></v-spacer>
 
-          <v-btn v-if="!$auth.loggedIn" large text class="mx-1 d-none d-sm-inline-block" @click="login()">
+          <v-btn
+            v-if="!$auth.loggedIn"
+            large
+            text
+            class="mx-1 d-none d-sm-inline-block"
+            @click="login()"
+          >
             Sign In
           </v-btn>
-          <v-btn v-if="!$auth.loggedIn" color="primary" large @click="login()"> Sign Up </v-btn>
-          <v-btn v-if="$auth.loggedIn" color="primary" large @click="logout()"> Log Out </v-btn>
+          <v-btn v-if="!$auth.loggedIn" color="primary" large @click="login()">
+            Sign Up
+          </v-btn>
+          <v-btn v-if="$auth.loggedIn" color="primary" large @click="logout()">
+            Log Out
+          </v-btn>
         </v-container>
       </v-app-bar>
     </LazyHydrate>
@@ -70,6 +85,7 @@
 import LazyHydrate from "vue-lazy-hydration";
 
 export default {
+  name: "Toolbar",
   props: {
     isFluid: {
       type: Boolean,
@@ -108,12 +124,12 @@ export default {
   },
   methods: {
     async login() {
-      await this.$auth.loginWith('auth0');
+      await this.$auth.loginWith("auth0");
     },
     async logout() {
       await this.$auth.logout();
-    }
-  }
+    },
+  },
 };
 </script>
 
