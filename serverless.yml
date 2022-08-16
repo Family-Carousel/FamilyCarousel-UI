@@ -55,9 +55,6 @@ plugins:
 package:
   individually: true
   excludeDevDependencies: false
-  patterns:
-    - "!.nuxt/**"
-    - ".nuxt/dist/**"
 
 custom:
   includeDependencies:
