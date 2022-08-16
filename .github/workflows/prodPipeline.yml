@@ -24,11 +24,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Create Env File
-      run: |
-        cat .env.dev > .env
-        echo MAILCHIMP_API_KEY=${{ secrets.MAILCHIMP_API_KEY_PROD }} >> .env 
-
     - name: Get yarn cache directory path
       id: yarn-cache-dir-path
       run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -45,8 +40,11 @@ jobs:
     - name: Install dependencies
       run: yarn
       
-    - name: Build Nuxt
-      run: yarn build
+    - name: Build env and Nuxt
+      run: |
+        echo "$(cat .env.prod)" > .env
+        echo MAILCHIMP_API_KEY=${{ secrets.MAILCHIMP_API_KEY_PROD }} >> .env 
+        yarn build
       
     - name: serverless create_domain
       uses: serverless/github-action@v3.1
