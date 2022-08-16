@@ -5,6 +5,10 @@ module.exports = {
   head: {
     titleTemplate: "%s - Family Carousel",
     title: "Family Carousel",
+    server: {
+      host: '0.0.0.0'
+    },
+    dev: process.env.NODE_ENV !== 'production',
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -156,9 +160,9 @@ module.exports = {
   pageTransition: {
     name: "default-page",
     mode: "out-in",
-    beforeEnter(el) {
-      console.log("Before enter...");
-    },
+    // beforeEnter(el) {
+    //   console.log("Before enter...");
+    // },
   },
   layoutTransition: {
     name: "default-layouts",
