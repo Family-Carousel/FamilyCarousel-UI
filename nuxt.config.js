@@ -2,8 +2,8 @@ module.exports = {
   srcDir: "src/",
   telemetry: false,
   server: {
-    host: "0.0.0.0",
-    port: "80",
+    host: process.env.NODE_ENV !== "production" ? 'localhost' : '0.0.0.0',
+    port: '3000'
   },
   performance: {
     gzip: false,
@@ -32,6 +32,20 @@ module.exports = {
         href: "https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css",
       },
     ],
+    script: [
+      {
+        // ROC-105: Display browser support message for IE (using document.documentMode to target IE)
+        hid: 'ie-script',
+        innerHTML: 'if (document.documentMode && window.location.href.indexOf(\'unsupported-browser\') === -1){' +
+          'window.location = \'/unsupported-browser\';' +
+          '}',
+        type: 'text/javascript',
+        id: 'ie-script'
+      }
+    ],
+    __dangerouslyDisableSanitizersByTagID: {
+      'ie-script': ['innerHTML']
+    }
   },
   css: ["~/assets/scss/theme.scss"],
   loading: {
@@ -42,8 +56,8 @@ module.exports = {
   },
   vue: {
     config: {
-      productionTip: true,
-      devtools: true,
+      productionTip: process.env.NODE_ENV !== "production",
+      devtools: process.env.NODE_ENV !== "production",
     },
   },
   plugins: [
@@ -77,8 +91,8 @@ module.exports = {
       {
         // proxy: false,
         baseURL: process.env.NUXT_ENV_DOMAIN_HTTPS,
-        credentials: true,
-        debug: true,
+        credentials: process.env.NODE_ENV !== "production",
+        debug: process.env.NODE_ENV !== "production",
         retry: {
           retries: 3,
         },
@@ -95,7 +109,7 @@ module.exports = {
   ],
   "google-gtag": {
     id: "gaId",
-    debug: true,
+    debug: process.env.NODE_ENV !== "production",
     disableAutoPageTrack: false,
   },
   auth: {

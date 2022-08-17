@@ -22,5 +22,11 @@ export default {
     Footer,
   },
   mixins: [setPageData],
+  // methods: {
+  //   async genToken() {
+  //     const token = this.$auth.strategy.token.get();
+  //     console.log(token);
+  //   }
+  // }
 };
 </script>
