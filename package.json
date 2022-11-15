@@ -30,7 +30,7 @@
     "cookie-universal-nuxt": "^2.2.2",
     "core-js": "^3.24.1",
     "csurf": "^1.11.0",
-    "date-fns": "^2.29.1",
+    "date-fns": "^2.29.3",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "helmet": "^5.1.1",
